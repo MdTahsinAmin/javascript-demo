@@ -4,6 +4,15 @@ const addIphone = document.getElementById('addIphone');
  addIphone.addEventListener('click',function(){
     updateElement('numberOfIphone');
     updateSpanTags('iphonePrice',1219);
+    updateSpanTags('subtotal',1219);
+    updateSpanTags('total',1219);
+   
+    taxAdd('tax',60);
+    var total =getElementBySpanTag('total');
+ 
+    total = total+60;
+
+    document.getElementById('total').innerText = total;
 
  })
 // minus sing
@@ -13,13 +22,39 @@ const subtract = document.getElementById('subtractIcon');
     
       subtractionElement('numberOfIphone');
       subtractSpanTags('iphonePrice','numberOfIphone',1219);
+      myFunction('subtotal',1219);
+      myFunction('total',1219);
+     
+      taxSub('tax',60);
+
+    var total =getElementBySpanTag('total');
+ 
+    total = total-60;
+    
+    if(total < 1278) total = 1278;
+    document.getElementById('total').innerText = total;
+    
+      
  })
 
  // add for iphone case
   const caseForIphone = document.getElementById('addIphoneCase');
    caseForIphone.addEventListener('click',function(){
-        updateElement('numberOfIphoneCase');
-        updateSpanTags('iphoneCasePrice',59);
+          updateElement('numberOfIphoneCase');
+          updateSpanTags('iphoneCasePrice',59);
+          updateSpanTags('subtotal',59);
+          updateSpanTags('total',59);
+         
+          taxAdd('tax',5);
+
+   
+   
+    var total =getElementBySpanTag('total');
+ 
+    total = total+5;
+
+    document.getElementById('total').innerText = total;
+    
    })
 
 
@@ -29,6 +64,19 @@ const subtract = document.getElementById('subtractIcon');
    subtractCaseForIphone.addEventListener('click',function(){
         subtractionElement('numberOfIphoneCase');
         subtractSpanTags('iphoneCasePrice','numberOfIphoneCase',59);
+         myFunction('subtotal',59);
+         myFunction('total',59);
+      
+         taxSub('tax',5);
+
+         
+    var total =getElementBySpanTag('total');
+ 
+    total = total-5;
+      if(total < 1278) total = 1278;
+    document.getElementById('total').innerText = total;
+    
+         
    })
 
    // images for x 
@@ -37,6 +85,7 @@ const subtract = document.getElementById('subtractIcon');
 
    imageRemove.addEventListener('click',function(){
        removeAllValue('numberOfIphone','iphonePrice',1219);
+
    })
 
    const imagesForCase = document.getElementById('removeCase');
@@ -50,13 +99,13 @@ const subtract = document.getElementById('subtractIcon');
 
 
    function removeAllValue(id1 , id2 ,number){
-         var inputTagsVlaue = getElementById('numberOfIphone');
+         var inputTagsVlaue = getElementById(id1);
        
-         var priceOfIphones = getElementBySpanTag('iphonePrice');
+         var priceOfIphones = getElementBySpanTag(id2);
           
          inputTagsVlaue = 1;
          priceOfIphones = number;
-        document.getElementById(id1) .value = inputTagsVlaue;
+         document.getElementById(id1) .value = inputTagsVlaue;
 
         document.getElementById(id2).innerText = priceOfIphones;
    }
@@ -120,5 +169,42 @@ function subtractionElement(id){
     if(numberOfIphones == 1) price = number;
      document.getElementById(id1).innerText = price;
 
-
  }
+
+function myFunction(id ,number){
+     var hello = document.getElementById(id).innerText;
+
+      var price  = parseFloat(hello);
+
+      price = price - number;
+      
+      if(price <= 1278 ) price = 1278;
+      
+      document.getElementById(id).innerText = price;
+}
+
+function taxAdd(id,number){
+
+    var taxValue = document.getElementById(id).innerText;
+    
+    var tax = parseFloat(taxValue);
+
+    tax = tax+number;
+
+    document.getElementById(id).innerText = tax;
+
+}
+
+function taxSub(id ,number){
+
+       var taxValue = document.getElementById(id).innerText;
+    
+      var tax = parseFloat(taxValue);
+
+     tax = tax-number;
+
+     if(tax <= 0) tax = 0;
+
+     document.getElementById(id).innerText = tax;
+
+}
